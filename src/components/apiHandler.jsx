@@ -3,8 +3,9 @@ import axios from "axios";
 
 const API_URL = "http://localhost:8080/products";
 
-export default function apiHandler() {
+export default function ApiHandler() {
   const [products, setProducts] = useState([]);
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -18,5 +19,14 @@ export default function apiHandler() {
     }
   };
 
-  return products;
+  const insertProduct = async (newProduct) => {
+    try {
+      const response = await axios.post(API_URL, newProduct);
+      setProducts([...products, response.data]);
+    } catch (error) {
+      console.error("Failed to insert product:", error);
+    }
+  };
+
+  return { products, insertProduct };
 }
