@@ -3,6 +3,7 @@ import { Box, ButtonGroup } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import Typography from "@mui/material/Typography";
 import ApiHandler from "./ApiHandler.jsx";
+import InsertButton from "./buttons/InsertButton.jsx";
 import DeleteButton from "./buttons/DeleteButton.jsx";
 import UpdateButton from "./buttons/UpdateButton.jsx";
 
@@ -18,8 +19,24 @@ export default function ProductsTable() {
     fetchProducts();
   }, []);
 
-  const handleDeleteProduct = (id) => {
+  const handleDelete = (id) => {
     const updatedProducts = products.filter((product) => product.id != id);
+    setProducts(updatedProducts);
+  };
+
+  const handleUpdate = (updatedProduct) => {
+    const updatedProducts = [...products];
+    const index = updatedProducts.findIndex(
+      (product) => product.id === updatedProduct.id
+    );
+    updatedProducts[index] = updatedProduct;
+    setProducts(updatedProducts);
+  };
+
+  const handleInsert = (newProduct) => {
+    const lastProduct = products[products.length - 1];
+    newProduct.id = lastProduct.id + 1;
+    const updatedProducts = [...products, newProduct];
     setProducts(updatedProducts);
   };
 
@@ -34,8 +51,8 @@ export default function ProductsTable() {
       type: "actions",
       renderCell: (params) => (
         <ButtonGroup>
-          <UpdateButton id={params.row.id} />
-          <DeleteButton id={params.row.id} onDelete={handleDeleteProduct} />
+          <UpdateButton id={params.row.id} onUpdate={handleUpdate} />
+          <DeleteButton id={params.row.id} onDelete={handleDelete} />
         </ButtonGroup>
       ),
     },
@@ -45,6 +62,7 @@ export default function ProductsTable() {
     <Box sx={{ height: 400, width: "100%" }}>
       <Typography>Inventário</Typography>
       <DataGrid rows={products} columns={columns}></DataGrid>
+      <InsertButton onInsert={handleInsert} />
     </Box>
   );
 }

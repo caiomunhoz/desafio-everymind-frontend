@@ -5,8 +5,16 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import ApiHandler from "../ApiHandler";
 
-export default function InsertModal({ open, onClose }) {
+export default function InsertDialog({ open, onClose, onInsert }) {
+  const { insertProduct } = ApiHandler();
+  const handleInsert = (formJson) => {
+    insertProduct(formJson);
+    onInsert(formJson);
+    onClose();
+  };
+
   return (
     <Dialog
       open={open}
@@ -17,8 +25,7 @@ export default function InsertModal({ open, onClose }) {
           event.preventDefault();
           const formData = new FormData(event.currentTarget);
           const formJson = Object.fromEntries(formData.entries());
-          console.log(formJson);
-          onClose();
+          handleInsert(formJson);
         },
       }}
     >
@@ -32,7 +39,7 @@ export default function InsertModal({ open, onClose }) {
           autoFocus
           required
           margin="dense"
-          name="product_name"
+          name="name"
           label="Nome"
           type="text"
           fullWidth
@@ -42,7 +49,7 @@ export default function InsertModal({ open, onClose }) {
           autoFocus
           required
           margin="dense"
-          name="product_description"
+          name="description"
           label="Descrição"
           type="text"
           fullWidth
@@ -52,7 +59,7 @@ export default function InsertModal({ open, onClose }) {
           autoFocus
           required
           margin="dense"
-          name="product_price"
+          name="price"
           label="Preço"
           type="number"
           fullWidth
