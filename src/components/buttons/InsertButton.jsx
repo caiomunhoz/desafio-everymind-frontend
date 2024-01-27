@@ -1,7 +1,7 @@
-import InsertDialog from "../dialogs/InsertDialog";
 import { useState } from "react";
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import InsertDialog from "../dialogs/InsertDialog";
 
 export default function InsertButton({ onInsert }) {
   const [open, setOpen] = useState(false);

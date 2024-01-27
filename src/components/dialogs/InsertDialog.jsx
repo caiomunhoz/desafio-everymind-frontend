@@ -1,14 +1,15 @@
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import ApiHandler from "../ApiHandler";
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
+import { insertProduct } from "../ApiHandler";
 
 export default function InsertDialog({ open, onClose, onInsert }) {
-  const { insertProduct } = ApiHandler();
   const handleInsert = (formJson) => {
     insertProduct(formJson);
     onInsert(formJson);

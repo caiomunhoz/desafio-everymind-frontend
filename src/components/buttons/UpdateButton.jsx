@@ -1,7 +1,7 @@
-import UpdateDialog from "../dialogs/UpdateDialog.jsx";
+import { useState } from "react";
 import { IconButton } from "@mui/material";
 import Edit from "@mui/icons-material/Edit";
-import { useState } from "react";
+import UpdateDialog from "../dialogs/UpdateDialog.jsx";
 
 export default function UpdateButton({ id, onUpdate }) {
   const [open, setOpen] = useState(false);

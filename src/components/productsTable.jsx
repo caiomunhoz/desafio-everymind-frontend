@@ -1,23 +1,20 @@
 import { useEffect, useState } from "react";
-import { Box, Container, ButtonGroup } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-
-import ApiHandler from "./ApiHandler.jsx";
-import InsertButton from "./buttons/InsertButton.jsx";
-import DeleteButton from "./buttons/DeleteButton.jsx";
-import UpdateButton from "./buttons/UpdateButton.jsx";
-import { BorderColor } from "@mui/icons-material";
+import { getProducts } from "./ApiHandler";
+import { Box, Container, ButtonGroup } from "@mui/material";
+import InsertButton from "./buttons/InsertButton";
+import DeleteButton from "./buttons/DeleteButton";
+import UpdateButton from "./buttons/UpdateButton";
 
 export default function ProductsTable() {
-  const { getProducts } = ApiHandler();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    async function fetchProducts() {
+    async function loadProducts() {
       const response = await getProducts();
       setProducts(response);
     }
-    fetchProducts();
+    loadProducts();
   }, []);
 
   const handleDelete = (id) => {

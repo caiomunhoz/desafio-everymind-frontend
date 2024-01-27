@@ -1,7 +1,7 @@
-import DeleteAlert from "../dialogs/DeleteAlert.jsx";
+import { useState } from "react";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useState } from "react";
+import DeleteAlert from "../dialogs/DeleteAlert";
 
 export default function DeleteButton({ id, onDelete }) {
   const [open, setOpen] = useState(false);
