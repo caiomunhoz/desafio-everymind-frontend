@@ -17,7 +17,6 @@ export default function UpdateDialog({ open, onClose, id, onUpdate }) {
   return (
     <Dialog
       open={open}
-      onClose={onClose}
       PaperProps={{
         component: "form",
         onSubmit: (event) => {
@@ -42,7 +41,7 @@ export default function UpdateDialog({ open, onClose, id, onUpdate }) {
           label="Nome"
           type="text"
           fullWidth
-          variant="standard"
+          variant="outlined"
         />
         <TextField
           autoFocus
@@ -52,7 +51,7 @@ export default function UpdateDialog({ open, onClose, id, onUpdate }) {
           label="Descrição"
           type="text"
           fullWidth
-          variant="standard"
+          variant="outlined"
         />
         <TextField
           autoFocus
@@ -62,12 +61,14 @@ export default function UpdateDialog({ open, onClose, id, onUpdate }) {
           label="Preço"
           type="number"
           fullWidth
-          variant="standard"
+          variant="outlined"
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Cancelar</Button>
-        <Button onClick={onClose} type="submit">
+        <Button variant="outlined" onClick={onClose}>
+          Cancelar
+        </Button>
+        <Button variant="contained" onClick={onClose} type="submit">
           Atualizar
         </Button>
       </DialogActions>

@@ -18,7 +18,6 @@ export default function InsertDialog({ open, onClose, onInsert }) {
   return (
     <Dialog
       open={open}
-      onClose={onClose}
       PaperProps={{
         component: "form",
         onSubmit: (event) => {
@@ -29,7 +28,7 @@ export default function InsertDialog({ open, onClose, onInsert }) {
         },
       }}
     >
-      <DialogTitle>Cadastrar</DialogTitle>
+      <DialogTitle>Inserir</DialogTitle>
       <DialogContent>
         <DialogContentText>
           Preencha os campos com os dados do produto que deseja cadastrar na
@@ -67,8 +66,10 @@ export default function InsertDialog({ open, onClose, onInsert }) {
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Cancelar</Button>
-        <Button onClick={onClose} type="submit">
+        <Button variant="outlined" onClick={onClose}>
+          Cancelar
+        </Button>
+        <Button variant="contained" onClick={onClose} type="submit">
           Cadastrar
         </Button>
       </DialogActions>

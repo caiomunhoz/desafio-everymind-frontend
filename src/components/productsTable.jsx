@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Box, ButtonGroup } from "@mui/material";
+import { Box, Container, ButtonGroup } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import Typography from "@mui/material/Typography";
+
 import ApiHandler from "./ApiHandler.jsx";
 import InsertButton from "./buttons/InsertButton.jsx";
 import DeleteButton from "./buttons/DeleteButton.jsx";
 import UpdateButton from "./buttons/UpdateButton.jsx";
+import { BorderColor } from "@mui/icons-material";
 
 export default function ProductsTable() {
   const { getProducts } = ApiHandler();
@@ -40,11 +41,23 @@ export default function ProductsTable() {
     setProducts(updatedProducts);
   };
 
+  const currencyFormatter = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+    minimumFractionDigits: 2,
+  });
+
+  const brlPrice = {
+    type: "number",
+    width: 100,
+    valueFormatter: ({ value }) => currencyFormatter.format(value),
+  };
+
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
     { field: "name", headerName: "Nome", width: 200 },
-    { field: "description", headerName: "Descrição", width: 700 },
-    { field: "price", headerName: "Preço", width: 70 },
+    { field: "description", headerName: "Descrição", width: 680 },
+    { field: "price", headerName: "Preço", ...brlPrice },
     {
       field: "actions",
       headerName: "Ações",
@@ -59,10 +72,17 @@ export default function ProductsTable() {
   ];
 
   return (
-    <Box sx={{ height: 400, width: "100%" }}>
-      <Typography>Inventário</Typography>
-      <DataGrid rows={products} columns={columns}></DataGrid>
-      <InsertButton onInsert={handleInsert} />
-    </Box>
+    <Container>
+      <Box p={1} display="flex" flexDirection="row-reverse">
+        <InsertButton onInsert={handleInsert} />
+      </Box>
+      <Box>
+        <DataGrid
+          columns={columns}
+          rows={products}
+          disableRowSelectionOnClick
+        ></DataGrid>
+      </Box>
+    </Container>
   );
 }

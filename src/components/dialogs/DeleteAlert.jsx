@@ -15,7 +15,7 @@ export default function DeleteAlert({ open, onClose, onDelete, id }) {
   };
 
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={open}>
       <DialogTitle>Deletar</DialogTitle>
       <DialogContent>
         <DialogContentText>
@@ -23,8 +23,12 @@ export default function DeleteAlert({ open, onClose, onDelete, id }) {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Cancelar</Button>
-        <Button onClick={handleDelete}>Deletar</Button>
+        <Button variant="outlined" onClick={onClose}>
+          Cancelar
+        </Button>
+        <Button variant="contained" onClick={handleDelete}>
+          Deletar
+        </Button>
       </DialogActions>
     </Dialog>
   );
