@@ -25,7 +25,7 @@ export default function UpdateDialog({ open, onClose, id, onUpdate }) {
           const formData = new FormData(event.currentTarget);
           const formJson = Object.fromEntries(formData.entries());
           formJson.id = id;
-          handleUpdate(formJson);
+          handleUpdate(formJson, id);
         },
       }}
     >
